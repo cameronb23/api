@@ -22,6 +22,10 @@ public class Application {
 
     @Bean
     CommandLineRunner init(UserRepository userRepository) {
-        return (evt) -> userRepository.save(new User("admin@google.com", "admin", "test"));
+        if(userRepository.findAll().size() < 1) {
+            return (evt) -> userRepository.save(new User("admin@google.com", "admin", "test"));
+        }
+
+        return null;
     }
 }
